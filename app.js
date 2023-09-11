@@ -31,6 +31,8 @@ app.use('/users', usersRouter);
 //   res.json({mainDeveloper: "Vianney Reyes"})
 // });
 
+app.use('/about', usersRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
