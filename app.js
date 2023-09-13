@@ -7,6 +7,7 @@ var debug = require('debug')('dwpc2:server');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var aboutRouter = require('./routes/about');
 
 // Se crea la instancia de express
 var app = express();
@@ -31,7 +32,8 @@ app.use('/users', usersRouter);
 //   res.json({mainDeveloper: "Vianney Reyes"})
 // });
 
-app.use('/about', usersRouter);
+app.use('/about', aboutRouter);
+app.use('/about/api', aboutRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
