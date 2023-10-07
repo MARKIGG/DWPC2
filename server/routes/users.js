@@ -1,14 +1,15 @@
-var express = require('express');
-var router = express.Router();
+import express from 'express';
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
+const router = express.Router();
+
+/* GET / users */
+router.get('/', (req, res) => {
   res.send('respond with a resource');
 });
 
-// GET /user/author
-router.get('/author', function(req, res, next) {
-  res.render('author', {author: "Vianney Reyes"});
+// Get /users/author
+router.get('/author', (_, res) => {
+  res.render('author', { author: 'Vianney Landin' });
 });
 
-module.exports = router;
+export default router;
