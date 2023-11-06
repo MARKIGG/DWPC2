@@ -13,8 +13,14 @@ const addForm = (req, res) => {
   res.render('project/addView');
 };
 
+// POST "/project/add"
+const addPost = (req, res) => {
+  res.status(200).json(req.body);
+};
+
 // Controlador Home
 export default {
   showDashboard,
   addForm,
+  addPost,
 };
