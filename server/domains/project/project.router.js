@@ -4,20 +4,30 @@ import { Router } from 'express';
 // Importando el controlador
 import projectController from './project.controller';
 
+// Importando factory de validación
+import ValidateFactory from '../../services/validateFactoy';
+// Importando el validador de proyectos
+import projectValidator from './project.validator';
+
 // Creando una isntancia del enrutador
 const router = new Router();
 
 // Enrutamos
-// GET /project/projects
-//  GET /project/dashboard
-router.get(['/projects', '/dashboard'], projectController.showDashboard);
+// GET "/project"
+router.get('/', projectController.showDashboard);
 
-// GET /project/add-form
-// GET /project/adda
-router.get(['/add-form', '/add'], projectController.addForm);
+// GET "/project/add"
+router.get('/add', projectController.add);
 
 // POST "/project/add"
-router.post('/add', projectController.addPost);
+router.post(
+  '/add',
+  ValidateFactory({
+    schema: projectValidator.projectSchema,
+    getObject: projectValidator.getProject,
+  }),
+  projectController.addPost,
+);
 
 // Exporto este tramo de ruta
 export default router;
