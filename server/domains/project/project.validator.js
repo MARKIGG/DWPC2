@@ -1,13 +1,10 @@
-// Importando biblioteca de validacion
 import * as Yup from 'yup';
 
-import log from '../../config/winston';
-
-// Creando un esquema de validación para el proyecto
+// Crear un esquema de validación
 const projectSchema = Yup.object().shape({
   name: Yup.string().required('Se requiere un nombre de proyecto'),
   description: Yup.string()
-    .max(500, 'No escribir mas de 500 caracteres')
+    .max(500, 'La descripción no debe tener mas de 500 caracteres')
     .required('Se requiere una descripción del proyecto'),
 });
 
@@ -15,9 +12,6 @@ const projectSchema = Yup.object().shape({
 const getProject = (req) => {
   // Extrayendo datos de la petición
   const { name, description } = req.body;
-  log.info(
-    `Se extraen datos de la petición: name ${name}, description: ${description}`,
-  );
   // Regresando el objeto proyecto
   return {
     name,

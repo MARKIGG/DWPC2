@@ -14,7 +14,7 @@ const router = new Router();
 
 // Enrutamos
 // GET "/project"
-router.get('/', projectController.showDashboard);
+router.get('/', projectController.dashboard);
 
 // GET "/project/add"
 router.get('/add', projectController.add);

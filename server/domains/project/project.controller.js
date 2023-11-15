@@ -1,9 +1,8 @@
-// Importing winston logger
 import log from '../../config/winston';
 
 // Actions methods
 // GET "/project"
-const showDashboard = (req, res) => {
+const dashboard = (req, res) => {
   res.send('⚠️ UNDER CONSTRUCTION: GET /project ⚠️');
 };
 
@@ -28,7 +27,6 @@ const addPost = (req, res) => {
     const { validData: project } = req;
     // Se contesta la información
     // del proyecto al cliente
-    log.info('Se entrega al cliente información del proyecto cargado');
     res.status(200).json(project);
   }
 };
@@ -36,7 +34,7 @@ const addPost = (req, res) => {
 // Controlador user
 export default {
   // Action Methods
-  showDashboard,
+  dashboard,
   add,
   addPost,
 };
