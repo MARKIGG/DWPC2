@@ -4,6 +4,8 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
+// Enable post and delete verbs
+import methodOverride from 'method-override';
 
 // Setting Webpack Modules
 import webpack from 'webpack';
@@ -66,13 +68,14 @@ if (nodeEnviroment === 'development') {
 
 // Configuring the template engine
 configTemplateEngine(app);
-//  Database connecition Checker Middleware
+
+// Database connection Checker Middleware
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
-    log.info('✅ Verificacion de conexion a db exitosa');
+    log.info('✅ Verificación de conexión a db existosa.');
     next();
   } else {
-    log.info('🔴 No pasa la verificacion de conexion a la db');
+    log.info('🔴 No pasa la verificacion de conexión a la BD');
     res.status(503).render('errors/e503View', { layout: 'errors' });
   }
 });
@@ -82,6 +85,8 @@ app.use(morgan('dev', { stream: log.stream }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+// Enable post and delete verbs
+app.use(methodOverride('_method'));
 // Crea un server de archivos estaticos
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
