@@ -53,6 +53,8 @@ const addPost = async (req, res) => {
     log.info(`Se carga proyecto ${savedProject}`);
     // Se registra en el log el redireccionamiento
     log.info('Se redirecciona el sistema a /project');
+    // Agregando mensaje de flash
+    req.flash('successMessage', 'Proyecto agregado con exito');
     // Se redirecciona el sistema a la ruta '/project'
     return res.redirect('/project/showDashboard');
   } catch (error) {
@@ -123,9 +125,25 @@ const editPut = async (req, res) => {
     // Se salvan los cambios
     log.info(`Actualizando proyecto con id: ${id}`);
     await project.save();
+    // Generando mensaje FLASH
+    req.flash('successMessage', 'Proyecto editado con exito');
     return res.redirect(`/project/edit/${id}`);
   } catch (error) {
     log.error(`Error al actualizar proyecto con id: ${id}`);
+    return res.status(500).json(error);
+  }
+};
+
+// DELETE "/project/:id"
+const deleteProject = async (req, res) => {
+  const { id } = req.params;
+  // Usando el modelo para borrar el proyecto
+  try {
+    const result = await ProjectModel.findByIdAndRemove(id);
+    // Agregando mensaje de flash
+    req.flash('successMessage', 'Proyecto borrado con exito');
+    return res.status(200).json(result);
+  } catch (error) {
     return res.status(500).json(error);
   }
 };
@@ -136,4 +154,5 @@ export default {
   addPost,
   edit,
   editPut,
+  deleteProject,
 };
