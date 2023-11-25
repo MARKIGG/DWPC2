@@ -1,17 +1,21 @@
-// Actions methods
-// GET "/login"
+import log from '../../config/winston';
+// Action Methods
+
+// GET '/user/login'
 const login = (req, res) => {
-  res.send("🚧 UNDER CONSTRUCTION '/user/login' 🚧");
+  // Sirve el formulario de login
+  log.info('Se entrega formulario de login');
+  res.render('user/login');
 };
 
-// GET "/logout"
+// GET '/user/logout'
 const logout = (req, res) => {
-  res.send("🚧 UNDER CONSTRUCTION '/user/logout' 🚧");
+  res.send("🚧 UNDER CONSTRUCTION GET  '/user/logout' 🚧");
 };
 
-// GET "/register"
+// GET '/user/register'
 const register = (req, res) => {
-  res.send("🚧 UNDER CONSTRUCTION '/user/register' 🚧");
+  res.send("🚧 UNDER CONSTRUCTION GET  '/user/register' 🚧");
 };
 
 export default {
